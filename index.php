@@ -2,7 +2,9 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$solution_factory = new Common\Solution(2019, 2);
+$options = getopt("y:d:");
+
+$solution_factory = new Common\Solution($options["y"], $options["d"]);
 
 $task = $solution_factory->get_solution();
 

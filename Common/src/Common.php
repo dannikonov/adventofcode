@@ -85,8 +85,10 @@ abstract class Common
 
     public function answer()
     {
-        foreach ($this->answer as $key => $value) {
-            echo "{$key}: {$value}\n";
+        if ($this->answer) {
+            foreach ($this->answer as $key => $value) {
+                echo "{$key}: {$value}\n";
+            }
         }
     }
 
