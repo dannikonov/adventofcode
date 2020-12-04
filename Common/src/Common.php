@@ -59,15 +59,20 @@ abstract class Common
     }
 
     /**
+     * @param string|null $in
      * @return array Values
      */
-    protected function split_by_comma()
+    protected function split_by_comma($in = null)
     {
-        $values = explode(",", $this->in);
+        if (!isset($in)) {
+            $in = $this->in;
+        }
+
+        $values = explode(",", $in);
 
         return array_filter(
             $values,
-            function ($value) {
+            static function ($value) {
                 return !isset($value) || !empty($value);
             }
         );
