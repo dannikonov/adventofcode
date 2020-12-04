@@ -23,16 +23,36 @@ abstract class Common
     }
 
     /**
-     * @param null $input
+     * @param string|null $in
      * @return array Values
      */
-    protected function split_by_line()
+    protected function split_by_line($in = null)
     {
-        $lines = explode("\n", $this->in);
+        if (!isset($in)) {
+            $in = $this->in;
+        }
+
+        $lines = explode("\n", $in);
 
         return array_filter(
             $lines,
-            function ($line) {
+            static function ($line) {
+                return !empty($line);
+            }
+        );
+    }
+
+    /**
+     * @param null $input
+     * @return array Values
+     */
+    protected function split_by_blank_line()
+    {
+        $lines = explode("\n\n", $this->in);
+
+        return array_filter(
+            $lines,
+            static function ($line) {
                 return !empty($line);
             }
         );
@@ -48,7 +68,7 @@ abstract class Common
         return array_filter(
             $values,
             function ($value) {
-                return !isset($var) || !empty($value);
+                return !isset($value) || !empty($value);
             }
         );
     }
