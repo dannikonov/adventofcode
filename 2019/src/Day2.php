@@ -21,17 +21,20 @@ class Day2 extends Common
 
         $i = 0;
         while ($i < count($input)) {
-            if (array_key_exists($i, $input) && $input[$i] === 99) {
-                break;
-            } else {
-                if (array_key_exists($i, $input) && $input[$i] === 1) {
-                    $input[$input[$i + 3]] = $input[$input[$i + 1]] + $input[$input[$i + 2]];
-                    $i += 4;
-                } elseif (array_key_exists($i, $input) && $input[$i] === 2) {
-                    $input[$input[$i + 3]] = $input[$input[$i + 1]] * $input[$input[$i + 2]];
-                    $i += 4;
-                } else {
-                    $i++;
+            if (array_key_exists($i, $input)) {
+                switch ($input[$i]) {
+                    case 99:
+                        return $input[0];
+                    case 1:
+                        $input[$input[$i + 3]] = $input[$input[$i + 1]] + $input[$input[$i + 2]];
+                        $i += 4;
+                        break;
+                    case 2:
+                        $input[$input[$i + 3]] = $input[$input[$i + 1]] * $input[$input[$i + 2]];
+                        $i += 4;
+                        break;
+                    default:
+                        $i++;
                 }
             }
         }
@@ -43,10 +46,11 @@ class Day2 extends Common
     protected function parse_input()
     {
         $values = $this->split_by_comma();
+
         array_walk(
             $values,
-            function (&$value) {
-                $value = intval($value);
+            static function (&$value) {
+                $value = (int)$value;
             }
         );
 
@@ -56,7 +60,6 @@ class Day2 extends Common
     public function solution_1()
     {
         $input = $this->parse_input();
-
         return $this->calc($input, 12, 2);
     }
 

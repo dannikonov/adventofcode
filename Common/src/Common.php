@@ -73,7 +73,7 @@ abstract class Common
         return array_filter(
             $values,
             static function ($value) {
-                return !isset($value) || !empty($value);
+                return !isset($value) || !empty($value) || $value === '0';
             }
         );
     }
