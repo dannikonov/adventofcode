@@ -13,3 +13,4 @@ task | 2015 | 2016 | 2017 | 2018 | 2019 | 2020
 9  |   | [+](https://adventofcode.com/2016/day/9) | | | | [+](https://adventofcode.com/2020/day/9)
 10 |   | | | | | [+](https://adventofcode.com/2020/day/10)
 11 |   | | | | | [+](https://adventofcode.com/2020/day/11)
+12 |   | | | | | [+](https://adventofcode.com/2020/day/12)
