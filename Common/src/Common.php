@@ -102,6 +102,32 @@ abstract class Common
         return $lines[0];
     }
 
+    protected function gcd($a, $b, &$x, &$y)
+    {
+        if ($a === 0) {
+            $x = 0;
+            $y = 1;
+            return $b;
+        }
+
+        $x1 = $y1 = 0;
+        $d = $this->gcd($b % $a, $a, $x1, $y1);
+        $x = $y1 - ($b / $a) * $x1;
+        $y = $x1;
+        return $d;
+    }
+
+    protected function rev($a, $m)
+    {
+        $x = $y = 0;
+        $g = $this->gcd($a, $m, $x, $y);
+        if ($g !== 1) {
+            return -1;
+        } else {
+            return ($x % $m + $m) % $m;
+        }
+    }
+
     abstract protected function parse_input();
 
     abstract function solution_1();
