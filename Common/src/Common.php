@@ -128,6 +128,14 @@ abstract class Common
         }
     }
 
+    protected function avg($array) {
+        if (count($array)) {
+            return array_sum($array) / count($array);
+        } else {
+            return -1;
+        }
+    }
+
     abstract protected function parse_input();
 
     abstract function solution_1();
