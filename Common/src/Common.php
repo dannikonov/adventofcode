@@ -89,7 +89,7 @@ abstract class Common
             array_filter(
                 $values,
                 function ($value) {
-                    return !empty($value);
+                    return !empty($value) || $value === '0';
                 }
             )
         );
