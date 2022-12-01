@@ -10,7 +10,7 @@ class Day1 extends Common
     function __construct($year, $day)
     {
         parent::__construct($year, $day);
-        $this->set_answer([1 => 72718, 2 => -1]);
+        $this->set_answer([1 => 72718, 2 => 213089]);
     }
 
     protected function parse_input()
