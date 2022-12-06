@@ -4,20 +4,6 @@ namespace y2022;
 
 use Common\Common;
 
-class Command
-{
-    public $n;
-    public $from;
-    public $to;
-
-    function __construct($n, $from, $to)
-    {
-        $this->n = $n;
-        $this->from = $from;
-        $this->to = $to;
-    }
-}
-
 class Day5 extends Common
 {
 
@@ -101,3 +87,16 @@ class Day5 extends Common
 
 }
 
+class Command
+{
+    public $n;
+    public $from;
+    public $to;
+
+    function __construct($n, $from, $to)
+    {
+        $this->n = $n;
+        $this->from = $from;
+        $this->to = $to;
+    }
+}
