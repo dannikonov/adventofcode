@@ -136,6 +136,10 @@ abstract class Common
         }
     }
 
+    protected function startWith($string, $search) {
+        return strpos($string, $search) === 0;
+    }
+
     abstract protected function parse_input();
 
     abstract function solution_1();
