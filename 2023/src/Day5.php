@@ -10,7 +10,7 @@ class Day5 extends Common
     function __construct($year, $day)
     {
         parent::__construct($year, $day);
-        $this->set_answer([1 => 178159714, 2 => 10378710]);
+        $this->set_answer([1 => 178159714, 2 => 100165128]);
     }
 
     protected function parse_input()
@@ -43,7 +43,7 @@ class Day5 extends Common
                 for ($m = 0; $m < count($map); $m++) {
                     list($dst, $src, $length) = $map[$m];
 
-                    if ($src <= $seed && $seed <= $src + $length) {
+                    if ($src <= $seed && $seed < $src + $length) {
                         $seed = $seed - $src + $dst;
                         break;
                     }
@@ -64,31 +64,39 @@ class Day5 extends Common
         }
 
         $min = INF;
-//        foreach ($seedRanges as $seedRange) {
-//            for ($i = 0; $i < $seedRange[1]; $i++) {
-//                $seed = $seedRange[0] + $i;
-////
-//                foreach ($maps as $map) {
-//                    for ($m = 0; $m < count($map); $m++) {
-//                        list($dst, $src, $length) = $map[$m];
-//
-//                        if ($src <= $seed) {
-//                            if ($seed <= $src + $length) {
-//                                $seed = $seed - $src + $dst;
-//                                break;
-//                            }
-//                        } else {
-//
-//                        }
-//                    }
-//                }
-//            }
-////
-//            echo $min . PHP_EOL;
-////
-//        }
-//        }
+        foreach ($seedRanges as $seedRange) {
+            for ($i = 0; $i < $seedRange[1]; $i++) {
+                $seed = $seedRange[0] + $i;
+                $skip = [];
 
+                foreach ($maps as $map) {
+                    $tmpMin = INF;
+                    for ($m = 0; $m < count($map); $m++) {
+                        list($dst, $src, $length) = $map[$m];
+
+                        if ($src <= $seed) {
+                            if ($seed < $src + $length) {
+                                $skip[] = $src + $length - $seed - 1; // nums to skip
+                                $seed = $seed - $src + $dst;
+                                break;
+                            }
+                        } else {
+                            $tmpMin = min([$tmpMin, $src - $seed + 1]); // nums to skip
+                        }
+                    }
+
+                    if ($tmpMin < INF) {
+                        $skip[] = $tmpMin;
+                    }
+                }
+
+                if (!empty($skip)) {
+                    $i += min($skip);
+                }
+
+                $min = min([$min, $seed]);
+            }
+        }
 
         return $min;
     }
